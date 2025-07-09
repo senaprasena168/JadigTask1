@@ -3,18 +3,49 @@
 import React, { useState, useEffect } from 'react'
 
 const texts = ["Apa kabar JABAR DIGITAL?", "Salam dari Sena!"]
+const subTexts = ["try clicking the text above!", "click on this text to see my repo!", "https://github.com/senaprasena168/JadigTask1"]
+const repoLink = "https://github.com/senaprasena168/JadigTask1"
 
 export default function Page() {
   const [isExploding, setIsExploding] = useState(false)
   const [explosionPosition, setExplosionPosition] = useState({ x: 0, y: 0 })
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  const [currentSubTextIndex, setCurrentSubTextIndex] = useState(0)
+  const [subTextAnimation, setSubTextAnimation] = useState('')
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const mainTextInterval = setInterval(() => {
       setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length)
     }, 2000)
-    return () => clearInterval(interval)
+    return () => clearInterval(mainTextInterval)
   }, [])
+
+  useEffect(() => {
+    // 1. Start fading in
+    setSubTextAnimation('fading-in');
+
+    // 2. After 0.5s, enter the 'hold' phase
+    const holdTimer = setTimeout(() => {
+      setSubTextAnimation('visible');
+    }, 500);
+
+    // 3. After 1.5s (0.5s fade-in + 1s hold), start fading out
+    const fadeOutTimer = setTimeout(() => {
+      setSubTextAnimation('fading-out');
+    }, 1500);
+
+    // 4. After 2s (full cycle), change the text index to trigger the next cycle
+    const cycleTimer = setTimeout(() => {
+      setCurrentSubTextIndex((prevIndex) => (prevIndex + 1) % subTexts.length);
+    }, 2000);
+
+    return () => {
+      clearTimeout(holdTimer);
+      clearTimeout(fadeOutTimer);
+      clearTimeout(cycleTimer);
+    };
+  }, [currentSubTextIndex]);
+
 
   const handleClick = () => {
     const x = (Math.random() - 0.5) * window.innerWidth * 0.25
@@ -25,10 +56,13 @@ export default function Page() {
   }
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <button className="burning-button" onClick={handleClick}>
         {texts[currentTextIndex]}
       </button>
+      <a href={repoLink} target="_blank" rel="noopener noreferrer" className={`sub-text ${subTextAnimation}`}>
+        {subTexts[currentSubTextIndex]}
+      </a>
       {isExploding && (
         <div
           className="explosion"
