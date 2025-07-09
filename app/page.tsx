@@ -48,11 +48,17 @@ export default function Page() {
 
 
   const handleClick = () => {
-    const x = (Math.random() - 0.5) * window.innerWidth * 0.25
-    const y = (Math.random() - 0.5) * window.innerHeight * 0.25
-    setExplosionPosition({ x, y })
-    setIsExploding(true)
-    setTimeout(() => setIsExploding(false), 600)
+    // Reset the explosion state to allow re-triggering the animation
+    setIsExploding(false);
+
+    // A small timeout to allow React to process the state change before re-enabling
+    setTimeout(() => {
+      // Increase the multiplier for a larger, more random spawn area
+      const x = (Math.random() - 0.5) * window.innerWidth * 0.6;
+      const y = (Math.random() - 0.5) * window.innerHeight * 0.6;
+      setExplosionPosition({ x, y });
+      setIsExploding(true);
+    }, 10);
   }
 
   return (
