@@ -58,26 +58,26 @@ body {
     opacity: 0;
   }
 }
-.sub-text {
-  font-size: 1.5rem;
-  font-family: 'Arial', sans-serif;
-  color: #fff;
+.fade-in-link {
+  font-size: 1rem;
+  font-family: "Arial Black", sans-serif;
+  color: rgb(255, 255, 255);
   text-decoration: none;
-  text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 15px #00bfff;
+  text-shadow: rgb(57, 255, 20) 0px 0px 5px, rgb(57, 255, 20) 0px 0px 10px, rgb(57, 255, 20) 0px 0px 20px, rgb(57, 255, 20) 0px 0px 40px, rgb(57, 255, 20) 0px 0px 80px, rgb(57, 255, 20) 0px 0px 90px, rgb(57, 255, 20) 0px 0px 100px, rgb(57, 255, 20) 0px 0px 150px;
   opacity: 0;
   margin-top: 20px;
   text-align: center;
 }
 
-.sub-text.fading-in {
+.fade-in-link.fading-in {
   animation: fadeIn 0.5s ease-in-out forwards;
 }
 
-.sub-text.visible {
+.fade-in-link.visible {
   opacity: 1;
 }
 
-.sub-text.fading-out {
+.fade-in-link.fading-out {
   animation: fadeOut 0.5s ease-in-out forwards;
 }
 

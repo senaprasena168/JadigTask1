@@ -60,7 +60,7 @@ export default function Page() {
       <button className="burning-button" onClick={handleClick}>
         {texts[currentTextIndex]}
       </button>
-      <a href={repoLink} target="_blank" rel="noopener noreferrer" className={`sub-text ${subTextAnimation}`}>
+      <a href={repoLink} target="_blank" rel="noopener noreferrer" className={`fade-in-link ${subTextAnimation}`}>
         {subTexts[currentSubTextIndex]}
       </a>
       {isExploding && (
